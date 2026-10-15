@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Contacto - RecursosEdu{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow border">
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">Página de Contacto</h1>
+    <p class="text-gray-600 mb-6">Si tienes dudas sobre los materiales o consultas sobre soporte, escríbenos mediante el siguiente formulario.</p>
+
+    <form onsubmit="event.preventDefault(); alert('Mensaje enviado correctamente.');" class="space-y-4">
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Nombre Completo</label>
+            <input type="text" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Correo Electrónico</label>
+            <input type="email" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Mensaje</label>
+            <textarea rows="4" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+        </div>
+        <button type="submit" class="bg-indigo-600 text-white font-bold py-2.5 px-6 rounded-lg hover:bg-indigo-700 transition">Enviar Mensaje</button>
+    </form>
+</div>
+{% endblock %}
