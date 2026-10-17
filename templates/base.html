@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Portal de Recursos Gratuitos{% endblock %}</title>
+    <title>{% block title %}Portal de Recursos Educativos - Siente y Aprende{% endblock %}</title>
     <!-- Tailwind CSS desde CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- SCRIPT OFICIAL DE GOOGLE ADSENSE -->
-    <!-- Cuando Google te apruebe, descomentas esta línea y colocas tu cliente pub-XXXXXXXXXXXXXXXX -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+    <!-- SCRIPT OFICIAL DE GOOGLE ADSENSE (Auto Ads & Vignette Ads) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
-    <!-- Encabezado Único -->
+    <!-- Encabezado Principal -->
     <header class="bg-slate-900 text-white shadow-lg">
         <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
 
@@ -28,20 +27,27 @@
             <!-- Menú de Navegación -->
             <nav class="flex items-center gap-6">
                 <a href="/" class="hover:text-teal-400 font-medium transition">Inicio</a>
+                <a href="/perfil" class="hover:text-teal-400 font-medium transition">Perfil</a>
                 <a href="/contacto" class="hover:text-teal-400 font-medium transition">Contacto</a>
             </nav>
 
         </div>
     </header>
 
-    <!-- Bloque Publicitario Superior (AdSense Banner) -->
+    <!-- Banner Publicitario Superior Orgánico -->
     <div class="container mx-auto my-4 px-4 text-center">
-        <div class="bg-gray-200 border border-dashed border-gray-400 p-4 rounded-lg">
-            <span class="text-xs text-gray-500 block mb-1">Publicidad</span>
-            <!-- Espacio para banner AdSense: <ins class="adsbygoogle" ...></ins> -->
-            <div class="h-16 flex items-center justify-center text-gray-400 text-sm font-semibold">
-                [Espacio Anuncio Banner AdSense / Ad Manager]
-            </div>
+        <div class="bg-gray-100 border border-gray-200 p-4 rounded-lg">
+            <span class="text-xs text-gray-400 block mb-1">Publicidad</span>
+            <!-- Código del Bloque Banner de AdSense -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
@@ -50,11 +56,12 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Pie de página con Enlaces Obligatorios para AdSense -->
+    <!-- Pie de Página -->
     <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-            <p>&copy; 2026 SienteyAprende. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Siente y Aprende. Todos los derechos reservados.</p>
             <div class="flex gap-6">
+                <a href="/perfil" class="hover:text-white">Perfil del Creador</a>
                 <a href="/privacidad" class="hover:text-white">Política de Privacidad</a>
                 <a href="/terminos" class="hover:text-white">Términos y Condiciones</a>
                 <a href="/contacto" class="hover:text-white">Contacto</a>
