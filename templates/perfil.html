@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil del Creador - Siente y Aprende{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border overflow-hidden">
+
+    <!-- Imagen de Portada -->
+    <div class="h-48 md:h-64 w-full bg-slate-800 relative">
+        <img src="{{ perfil.portada }}"
+             alt="Portada Siente y Aprende"
+             class="w-full h-full object-cover">
+    </div>
+
+    <!-- Información de Perfil -->
+    <div class="px-6 pb-8 relative">
+        <!-- Avatar / Foto de Perfil -->
+        <div class="-mt-16 sm:-mt-20 mb-4 flex justify-center sm:justify-start">
+            <img src="{{ perfil.foto }}"
+                 alt="{{ perfil.nombre }}"
+                 class="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-white shadow-lg object-cover bg-white">
+        </div>
+
+        <div class="text-center sm:text-left">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">{{ perfil.nombre }}</h1>
+            <p class="text-teal-600 font-semibold text-sm mb-4">{{ perfil.subtitulo }}</p>
+
+            <p class="text-gray-700 leading-relaxed max-w-3xl mb-6">
+                {{ perfil.descripcion }}
+            </p>
+        </div>
+
+        <!-- Bloque Publicitario Sutil dentro del Perfil -->
+        <div class="my-6 p-3 bg-gray-50 border border-dashed border-gray-200 rounded-xl text-center">
+            <span class="text-xs text-gray-400 block mb-1">Publicidad</span>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="3344556677"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Redes Sociales y Enlaces Oficiales -->
+        <div class="mt-8 border-t pt-6">
+            <h2 class="text-lg font-bold text-gray-900 mb-4 text-center sm:text-left">Conecta en Redes Sociales y Donaciones</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {% for red in perfil.redes %}
+                <a href="{{ red.url }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="flex items-center gap-3.5 p-3.5 rounded-xl border border-gray-200 {{ red.color }} transition shadow-sm group">
+
+                    <!-- ÍCONOS SVG VECTORIALES -->
+                    <div class="w-7 h-7 flex items-center justify-center flex-shrink-0">
+                        {% if red.id == 'youtube' %}
+                            <svg class="w-6 h-6 fill-red-600" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+
+                        {% elif red.id == 'facebook' %}
+                            <svg class="w-6 h-6 fill-blue-600" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+
+                        {% elif red.id == 'instagram' %}
+                            <svg class="w-6 h-6 fill-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+
+                        {% elif red.id == 'tiktok' %}
+                            <svg class="w-6 h-6 fill-black" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.28-2.36.54-4.74 2.18-6.42 1.25-1.31 2.97-2.14 4.82-2.27 1.05-.09 2.1.08 3.07.49V12.1c-.69-.35-1.47-.53-2.25-.49-.93.02-1.85.38-2.53 1.01-.84.77-1.28 1.9-1.22 3.03.04 1.04.53 2.03 1.34 2.68 1.02.82 2.41 1.07 3.65.65 1.11-.36 2.02-1.23 2.37-2.32.17-.55.22-1.13.22-1.7V.02z"/></svg>
+
+                        {% elif red.id == 'eduki' %}
+                            <svg class="w-6 h-6 fill-teal-600" viewBox="0 0 24 24"><path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 10.5L3.5 8 12 4.13 20.5 8 12 12.5zM4 11.5v6.09L12 22l8-4.41V11.5L12 16 4 11.5z"/></svg>
+
+                        {% elif red.id == 'kdp' %}
+                            <svg class="w-6 h-6 fill-amber-600" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l7 4.5-7 4.5z"/></svg>
+
+                        {% elif red.id == 'paypal' %}
+                            <svg class="w-6 h-6 fill-sky-600" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .761-.645h6.812c2.25 0 3.998.547 5.056 1.583 1.013.992 1.42 2.385 1.173 4.022-.444 2.946-2.58 4.606-5.837 4.606H9.957a.77.77 0 0 0-.761.645l-1.378 8.75a.64.64 0 0 1-.742.656zm2.842-12.75l-1.07 6.8h2.06c1.787 0 3.125-.807 3.39-2.571.258-1.72-.81-2.43-2.57-2.43H9.918z"/></svg>
+
+                        {% else %}
+                            <span class="text-xl">🔗</span>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <span class="block font-bold text-gray-800 group-hover:text-gray-900 text-sm">{{ red.nombre }}</span>
+                        <span class="block text-xs text-gray-500">{{ red.usuario }}</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
