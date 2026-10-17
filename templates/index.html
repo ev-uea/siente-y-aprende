@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Catálogo y Tienda Exclusiva - Siente y Aprende{% endblock %}
+{% block title %}Catálogo de Recursos Educativos Gratuitos - Siente y Aprende{% endblock %}
 
 {% block content %}
-<div class="max-w-6xl mx-auto space-y-16">
+<div class="max-w-6xl mx-auto space-y-12">
 
     <!-- Sección Hero / Portada -->
     <div class="bg-white rounded-2xl shadow-sm border p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
@@ -17,51 +17,75 @@
                 Aprende a tu ritmo con material educativo
             </h1>
             <p class="text-gray-600">
-                Explora guías, canciones infantiles y recursos creados para acompañar tu aprendizaje. Accede gratis a nuestro catálogo visualizando un anuncio o adquiere nuestras publicaciones exclusivas.
+                Explora guías, actividades de lectoescritura, canciones infantiles y recursos pedagógicos creados para acompañar el aprendizaje infantil. Descarga todo nuestro catálogo de forma gratuita y directa.
             </p>
         </div>
     </div>
 
-    <!-- SECCIÓN 1: CATÁLOGO GRATUITO / ANUNCIOS (10 ESPACIOS) -->
+    <!-- SECCIÓN 1: CATÁLOGO DE MATERIALES (DESCARGA DIRECTA CON AD IN-FEED SUTIL) -->
     <section>
         <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Descarga Materiales y Guías Gratuitas</h2>
-            <p class="text-gray-600">Accede a todo nuestro contenido educativo viendo un breve anuncio de apoyo.</p>
+            <p class="text-gray-600">Haz clic en cualquier recurso para acceder al PDF en Google Drive inmediatamente.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {% for item in materiales %}
-                {% set esta_desbloqueado = (item.tipo == 'gratis') or (item.id in desbloqueados) %}
                 <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 flex flex-col justify-between hover:shadow-lg transition">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="text-lg font-bold text-gray-800">{{ item.titulo }}</h3>
-                            {% if item.tipo == 'gratis' %}
-                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full">Gratis Directo</span>
-                            {% else %}
-                                <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-1 rounded-full">Con Anuncio</span>
-                            {% endif %}
+                            <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-1 rounded-full">Gratis</span>
                         </div>
                         <p class="text-gray-600 text-sm mb-4">{{ item.descripcion }}</p>
                     </div>
 
                     <div class="mt-4 pt-4 border-t border-gray-100">
-                        {% if esta_desbloqueado %}
-                            <a href="{{ item.url_descarga }}" target="_blank" class="w-full inline-flex justify-center items-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-4 rounded-lg shadow transition">
-                                Descargar Ahora
-                            </a>
-                        {% else %}
-                            <button onclick="iniciarDesbloqueo({{ item.id }}, '{{ item.titulo }}', '{{ item.url_descarga }}')" class="w-full inline-flex justify-center items-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-2.5 px-4 rounded-lg shadow transition">
-                                Ver Anuncio y Desbloquear
-                            </button>
-                        {% endif %}
+                        <a href="{{ item.url_descarga }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="w-full inline-flex justify-center items-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-4 rounded-lg shadow transition">
+                            Descargar Ahora
+                        </a>
                     </div>
                 </div>
+
+                <!-- Espacio de Anuncio Sutil In-Feed (aparece tras cada 4 materiales) -->
+                {% if loop.index == 4 or loop.index == 8 %}
+                <div class="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-4 flex flex-col justify-center items-center text-center md:col-span-2 my-2">
+                    <span class="text-xs text-gray-400 block mb-1">Publicidad Recomendada</span>
+                    <ins class="adsbygoogle"
+                         style="display:block; width:100%"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1122334455"
+                         data-ad-format="fluid"
+                         data-ad-layout-key="-fb+5w+4e-db+86"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </section>
 
-    <!-- SECCIÓN 2: CANCIONES INFANTILES (ENLACE A CANAL DE YOUTUBE) -->
+    <!-- Bloque Publicitario Horizontal entre Secciones -->
+    <div class="text-center my-6">
+        <div class="bg-gray-100 border border-gray-200 p-4 rounded-xl inline-block w-full">
+            <span class="text-xs text-gray-400 block mb-1">Publicidad</span>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: CANCIONES INFANTILES -->
     <section class="bg-purple-50 -mx-4 px-4 py-10 rounded-3xl border border-purple-100 sm:px-8 text-center">
         <div class="max-w-2xl mx-auto space-y-4">
             <span class="bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -77,7 +101,6 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    class="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
-                    <!-- Icono de YouTube en SVG -->
                     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
@@ -87,70 +110,5 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 3: TIENDA EXCLUSIVA DE LIBROS (VENTA DIRECTA) -->
-    <section class="bg-slate-100 -mx-4 px-4 py-10 rounded-3xl border border-slate-200 sm:px-8">
-        <div class="text-center mb-8">
-            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Venta Directa</span>
-            <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-2">Libros y Publicaciones Exclusivas</h2>
-            <p class="text-gray-600">Libros completos en formato digital de compra individual.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {% for libro in libros %}
-                {% set esta_comprado = libro.id in comprados %}
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 flex flex-col sm:flex-row">
-                    <div class="sm:w-2/5 bg-gray-50 flex items-center justify-center p-4">
-                        <img src="{{ libro.imagen }}" alt="{{ libro.titulo }}" class="h-48 object-contain rounded shadow">
-                    </div>
-                    <div class="p-6 sm:w-3/5 flex flex-col justify-between">
-                        <div>
-                            <span class="text-2xl font-extrabold text-teal-600 block mb-1">{{ libro.precio }}</span>
-                            <h3 class="text-lg font-bold text-gray-900 mb-2">{{ libro.titulo }}</h3>
-                            <p class="text-gray-600 text-sm mb-4">{{ libro.descripcion }}</p>
-                        </div>
-
-                        <div>
-                            {% if esta_comprado %}
-                                <a href="{{ libro.url_descarga }}" target="_blank" class="w-full inline-flex justify-center items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-lg shadow transition">
-                                    Descargar Libro (Comprado)
-                                </a>
-                            {% else %}
-                                <button onclick="procesarCompraLibro({{ libro.id }}, '{{ libro.link_compra }}')" class="w-full inline-flex justify-center items-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 px-4 rounded-lg shadow transition">
-                                    Comprar Libro
-                                </button>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
-</div>
-
-<!-- Modal de Anuncios -->
-<div id="modalAnuncio" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-2xl relative">
-        <h3 id="modalTitulo" class="text-xl font-bold text-gray-800 mb-2">Desbloqueando Recurso</h3>
-        <p class="text-sm text-gray-500 mb-4">Por favor aguarde a que finalice el anuncio para obtener su enlace de descarga.</p>
-
-        <div class="bg-gray-100 border rounded-lg p-6 my-4 min-h-[180px] flex flex-col items-center justify-center">
-            <span class="text-xs text-gray-400 mb-2">Anuncio Patrocinado</span>
-            <div class="text-gray-400 font-medium text-sm">
-                [Espacio Publicitario AdSense / Ad Manager]
-            </div>
-        </div>
-
-        <div id="areaContador" class="my-4">
-            <div id="contador" class="text-4xl font-extrabold text-teal-600">10</div>
-            <p class="text-xs text-gray-400 mt-1">segundos restantes</p>
-        </div>
-
-        <div id="areaDescarga" class="hidden mt-4">
-            <a id="btnDescargaFinal" href="#" target="_blank" onclick="confirmarDesbloqueoServidor()" class="w-full inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">
-                ¡Obtener Enlace!
-            </a>
-        </div>
-    </div>
 </div>
 {% endblock %}
