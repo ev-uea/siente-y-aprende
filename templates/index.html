@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Catálogo de Recursos Educativos Gratuitos - Siente y Aprende{% endblock %}
+{% block title %}Catálogo de Recursos Educativos y Guías - Siente y Aprende{% endblock %}
 
 {% block content %}
 <div class="max-w-6xl mx-auto space-y-12">
 
-    <!-- Sección Hero / Portada -->
+    <!-- Encabezado Hero -->
     <div class="bg-white rounded-2xl shadow-sm border p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
         <div class="w-full md:w-1/2">
             <img src="{{ url_for('static', filename='img/portada.jpeg') }}"
@@ -14,19 +14,58 @@
         </div>
         <div class="flex-1 text-center md:text-left">
             <h1 class="text-3xl font-extrabold text-slate-900 mb-3">
-                Aprende a tu ritmo con material educativo
+                Aprende a tu ritmo con material educativo de alta calidad
             </h1>
-            <p class="text-gray-600">
-                Explora guías, actividades de lectoescritura, canciones infantiles y recursos pedagógicos creados para acompañar el aprendizaje infantil. Descarga todo nuestro catálogo de forma gratuita y directa.
+            <p class="text-gray-600 leading-relaxed">
+                Explora nuestras guías pedagógicas, fichas de lectoescritura, ejercicios grafomotrices y artículos educativos diseñados por profesionales para acompañar el desarrollo cognitivo e infantil. Descarga todo de forma directa y gratuita.
             </p>
         </div>
     </div>
 
-    <!-- SECCIÓN 1: CATÁLOGO DE MATERIALES (DESCARGA DIRECTA CON AD IN-FEED SUTIL) -->
+    <!-- SECCIÓN 1: ARTÍCULOS PEDAGÓGICOS (CLAVE PARA ADSENSE) -->
     <section>
         <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">Descarga Materiales y Guías Gratuitas</h2>
-            <p class="text-gray-600">Haz clic en cualquier recurso para acceder al PDF en Google Drive inmediatamente.</p>
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Artículos Educativos</span>
+            <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-2">Guías y Orientación Pedagógica</h2>
+            <p class="text-gray-600">Lecturas recomendadas para educadores, docentes y padres de familia.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for art in articulos %}
+            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 flex flex-col justify-between hover:shadow-lg transition">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ art.titulo }}</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ art.resumen }}</p>
+                </div>
+                <a href="/articulo/{{ art.id }}" class="inline-flex items-center text-teal-600 hover:text-teal-800 font-bold text-sm">
+                    Leer Artículo Completo &rarr;
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Bloque Publicitario Horizontal -->
+    <div class="text-center my-6">
+        <div class="bg-gray-100 border border-gray-200 p-4 rounded-xl inline-block w-full">
+            <span class="text-xs text-gray-400 block mb-1">Publicidad</span>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3776946834816103"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: CATÁLOGO DE RECURSOS EDUCATIVOS -->
+    <section>
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Descarga Materiales y Fichas Gratuitas</h2>
+            <p class="text-gray-600">Accede directamente al archivo PDF en Google Drive con un solo clic.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -37,76 +76,19 @@
                             <h3 class="text-lg font-bold text-gray-800">{{ item.titulo }}</h3>
                             <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-1 rounded-full">Gratis</span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-4">{{ item.descripcion }}</p>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ item.descripcion }}</p>
                     </div>
 
                     <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="{{ item.url_descarga }}"
-                           target="_blank"
-                           rel="noopener noreferrer"
+                        <a href="{{ item.url_descarga }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
                            class="w-full inline-flex justify-center items-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-4 rounded-lg shadow transition">
-                            Descargar Ahora
+                            Descargar Ahora (PDF)
                         </a>
                     </div>
                 </div>
-
-                <!-- Espacio de Anuncio Sutil In-Feed (aparece tras cada 4 materiales) -->
-                {% if loop.index == 4 or loop.index == 8 %}
-                <div class="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-4 flex flex-col justify-center items-center text-center md:col-span-2 my-2">
-                    <span class="text-xs text-gray-400 block mb-1">Publicidad Recomendada</span>
-                    <ins class="adsbygoogle"
-                         style="display:block; width:100%"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1122334455"
-                         data-ad-format="fluid"
-                         data-ad-layout-key="-fb+5w+4e-db+86"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-                {% endif %}
             {% endfor %}
-        </div>
-    </section>
-
-    <!-- Bloque Publicitario Horizontal entre Secciones -->
-    <div class="text-center my-6">
-        <div class="bg-gray-100 border border-gray-200 p-4 rounded-xl inline-block w-full">
-            <span class="text-xs text-gray-400 block mb-1">Publicidad</span>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                 data-ad-slot="0987654321"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 2: CANCIONES INFANTILES -->
-    <section class="bg-purple-50 -mx-4 px-4 py-10 rounded-3xl border border-purple-100 sm:px-8 text-center">
-        <div class="max-w-2xl mx-auto space-y-4">
-            <span class="bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                Música Educativa
-            </span>
-            <h2 class="text-3xl font-bold text-gray-900">Canciones Infantiles</h2>
-            <p class="text-gray-600">
-                Disfruta de nuestros videos musicales, canciones pedagógicas y recursos auditivos directamente en nuestro canal oficial de YouTube.
-            </p>
-
-            <div class="pt-4">
-                <a href="https://www.youtube.com/@SienteyAprende"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
-                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                    Visitar Canal de YouTube
-                </a>
-            </div>
         </div>
     </section>
 
